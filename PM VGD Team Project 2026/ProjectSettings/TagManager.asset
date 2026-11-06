@@ -9,6 +9,9 @@ TagManager:
   - sword
   - bow
   - weaponManager
+  - fireGate
+  - waterGate
+  - natureGate
   layers:
   - Default
   - TransparentFX
