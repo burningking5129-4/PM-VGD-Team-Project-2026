@@ -651,6 +651,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerMovement
   speed: 3.5
+  foundWeapon: 
+  isAttacking: 0
+  canAttack: 0
+  currentWeaponObj: {fileID: 0}
+  weapon: {fileID: 0}
   rb: {fileID: 609349934}
   moveInput: {x: 0, y: 0}
 --- !u!114 &609349936
@@ -1176,6 +1181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0124afaa1e86a3748b38c9c1e447a835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
+  player: {fileID: 0}
+  weapon: {fileID: 0}
 --- !u!4 &1028987852
 Transform:
   m_ObjectHideFlags: 0

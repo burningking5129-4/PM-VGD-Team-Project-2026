@@ -8,6 +8,7 @@ TagManager:
   - spear
   - sword
   - bow
+  - weaponManager
   layers:
   - Default
   - TransparentFX
