@@ -13,6 +13,7 @@ public class playerMovement : MonoBehaviour
     public bool canAttack = false;
 
     public GameObject currentWeaponObj;
+    public GameObject findingWeapon;
 
     public WeaponScript weapon;
 
@@ -20,9 +21,10 @@ public class playerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 moveInput;
     
-    //initializes the rigidbody and identifies it
+    //initializes variables
     void Start()
     {
+        weaponSlot = transform.GetChild(0);
         rb.GetComponent<Rigidbody2D>();
         weaponsKnown = new string[3];
         weaponsKnown[0] = "sword";
@@ -46,7 +48,7 @@ public class playerMovement : MonoBehaviour
     {
         for(int i = 0; i < weaponsKnown.Length; i++)
         {
-            if(gameObject.tag  == weaponsKnown[i])
+            if(findingWeapon.tag  == weaponsKnown[i])
             {
                 foundWeapon = weaponsKnown[i];
             }
@@ -56,10 +58,14 @@ public class playerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        findingWeapon = collision.gameObject;
         if (collision.gameObject.tag == findWeaponName())
         {
-            collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position,
-                                                        new Quaternion(0, 0, -90f, 90));
+            collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
+            if (findWeaponName() == "spear")
+            {
+                rb.rotation = 90;
+            }
 
             collision.gameObject.transform.SetParent(weaponSlot);
 
@@ -71,5 +77,10 @@ public class playerMovement : MonoBehaviour
             currentWeaponObj = collision.gameObject;
             canAttack = true;
         }
+    }
+
+    private void attack()
+    {
+
     }
 }
