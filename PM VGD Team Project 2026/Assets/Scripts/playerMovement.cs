@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class playerMovement : MonoBehaviour
 
     public string foundWeapon;
     public string[] weaponsKnown;
+    public string[] gate;
+    public string findingGate;
 
     public bool isAttacking = false;
     public bool canAttack = false;
@@ -27,9 +30,13 @@ public class playerMovement : MonoBehaviour
         weaponSlot = transform.GetChild(0);
         rb.GetComponent<Rigidbody2D>();
         weaponsKnown = new string[3];
+        gate = new string[3];
         weaponsKnown[0] = "sword";
         weaponsKnown[1] = "spear";
         weaponsKnown[2] = "bow";
+        gate[0] = "fireGate";
+        gate[1] = "waterGate";
+        gate[2] = "natureGate";
     }
 
    //defines the velocity
@@ -56,6 +63,18 @@ public class playerMovement : MonoBehaviour
         return foundWeapon;
     }
 
+    public string findGate()
+    {
+        for (int i = 0; i < gate.Length; i++)
+        {
+            if (findingGate == gate[i])
+            {
+                findingGate = gate[i]; ;
+            }
+        }
+        return findingGate;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         findingWeapon = collision.gameObject;
@@ -65,6 +84,7 @@ public class playerMovement : MonoBehaviour
             if (findWeaponName() == "spear")
             {
                 rb.rotation = 90;
+
             }
 
             collision.gameObject.transform.SetParent(weaponSlot);
@@ -77,10 +97,27 @@ public class playerMovement : MonoBehaviour
             currentWeaponObj = collision.gameObject;
             canAttack = true;
         }
-    }
-
-    private void attack()
-    {
-
+        findingGate = collision.gameObject.tag;
+        if (collision.gameObject.tag == findGate())
+        {
+            if (findGate() == "fireGate")
+            {
+                SceneManager.LoadScene(1);
+            }
+            else if (findGate() == "waterGate")
+            {
+                SceneManager.LoadScene(3);
+            }
+            else if (findGate() == "natureGate")
+            {
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                Debug.Log("something is wrong");
+            }
+        }
     }
 }
+
+  
