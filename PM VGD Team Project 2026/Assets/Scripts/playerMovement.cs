@@ -112,9 +112,9 @@ public class playerMovement : MonoBehaviour
             {
                 SceneManager.LoadScene(2);
             }
-            else
+        if (collision.gameObject.tag == "dungonExit")
             {
-                Debug.Log("something is wrong");
+                SceneManager.LoadScene(0);
             }
         }
     }

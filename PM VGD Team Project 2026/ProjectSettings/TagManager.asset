@@ -12,6 +12,7 @@ TagManager:
   - fireGate
   - waterGate
   - natureGate
+  - dungonExit
   layers:
   - Default
   - TransparentFX
