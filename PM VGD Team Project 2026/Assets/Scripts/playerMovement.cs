@@ -7,6 +7,8 @@ public class playerMovement : MonoBehaviour
     //player movement variables \ speed doesnt change in script, must change in inspector
     public float speed = 3.5f;
 
+    public int hp = 100;
+
     public string foundWeapon;
     public string[] weaponsKnown;
     public string[] gate;
