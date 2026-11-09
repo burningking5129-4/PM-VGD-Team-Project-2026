@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Fire dungon.unity
     guid: 32ccdb585c306764c9cd4e5f7be66dd6
   - enabled: 1
-    path: Assets/Scenes/Nature dungon.unity
-    guid: f9c02c2521a632f439e0764a8e8d44ec
+    path: Assets/Scenes/Nature Dungon.unity
+    guid: 65431f519424a2b46ad81eb7069a2e1a
   - enabled: 1
-    path: Assets/Scenes/Water dungon.unity
-    guid: a01562dcdf435be4bb1f24512474e9b8
+    path: Assets/Scenes/Water Dungon.unity
+    guid: 430d38c9e959f6d4f86890ad25de6408
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

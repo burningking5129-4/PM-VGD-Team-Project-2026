@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -6,19 +7,20 @@ public class playerMovement : MonoBehaviour
 {
     //player movement variables \ speed doesnt change in script, must change in inspector
     public float speed = 3.5f;
-
-    public int hp = 100;
+    public float hp = 100;
 
     public string foundWeapon;
     public string[] weaponsKnown;
     public string[] gate;
     public string findingGate;
+    public string weaponHeld;
 
     public bool isAttacking = false;
     public bool canAttack = false;
 
     public GameObject currentWeaponObj;
     public GameObject findingWeapon;
+    public Collider2D currentWeaponCol;
 
     public WeaponScript weapon;
 
@@ -80,44 +82,64 @@ public class playerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         findingWeapon = collision.gameObject;
-        if (collision.gameObject.tag == findWeaponName())
+        if (currentWeaponObj == null)
         {
-            collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
-            if (findWeaponName() == "spear")
+            if (collision.gameObject.tag == findWeaponName())
             {
-                rb.rotation = 90;
+                Debug.Log("collided");
+                collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
+                if (findWeaponName() == "spear")
+                {
+                    rb.rotation = 90;
 
+                }
+
+                weaponHeld = collision.gameObject.tag;
+
+                collision.gameObject.transform.SetParent(weaponSlot);
+
+                collision.rigidbody.bodyType = RigidbodyType2D.Kinematic;
+
+                collision.collider.enabled = false;
+
+                collision.rigidbody.linearVelocity = Vector3.zero;
+
+                currentWeaponObj = collision.gameObject;
+                currentWeaponCol = currentWeaponObj.GetComponent<Collider2D>();
+                weapon = currentWeaponObj.GetComponent<WeaponScript>();
+                canAttack = true;
             }
-
-            collision.gameObject.transform.SetParent(weaponSlot);
-
-            collision.rigidbody.bodyType = RigidbodyType2D.Kinematic;
-            collision.rigidbody.simulated = false;
-
-            collision.collider.enabled = false;
-
-            currentWeaponObj = collision.gameObject;
-            canAttack = true;
+            findingGate = collision.gameObject.tag;
+            if (collision.gameObject.tag == findGate())
+            {
+                if (findGate() == "fireGate")
+                {
+                    SceneManager.LoadScene(1);
+                }
+                else if (findGate() == "waterGate")
+                {
+                    SceneManager.LoadScene(3);
+                }
+                else if (findGate() == "natureGate")
+                {
+                    SceneManager.LoadScene(2);
+                }
+                if (collision.gameObject.tag == "dungonExit")
+                {
+                    SceneManager.LoadScene(0);
+                }
+            }
         }
-        findingGate = collision.gameObject.tag;
-        if (collision.gameObject.tag == findGate())
+    }
+
+    public void Drop()
+    {
+        if (currentWeaponObj != null)
         {
-            if (findGate() == "fireGate")
-            {
-                SceneManager.LoadScene(1);
-            }
-            else if (findGate() == "waterGate")
-            {
-                SceneManager.LoadScene(3);
-            }
-            else if (findGate() == "natureGate")
-            {
-                SceneManager.LoadScene(2);
-            }
-        if (collision.gameObject.tag == "dungonExit")
-            {
-                SceneManager.LoadScene(0);
-            }
+            currentWeaponCol.enabled = true;
+            weaponSlot.DetachChildren();
+            weapon.weaponRb.linearVelocity = Vector2.zero;
+            currentWeaponObj = null;
         }
     }
 }
