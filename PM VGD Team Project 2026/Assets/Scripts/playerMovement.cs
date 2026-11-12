@@ -48,6 +48,7 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = moveInput * speed;
+
     }
     
     //moves the player
