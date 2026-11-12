@@ -8,6 +8,7 @@ public class playerMovement : MonoBehaviour
     //player movement variables \ speed doesnt change in script, must change in inspector
     public float speed = 3.5f;
     public float hp = 100;
+    public float maxhp = 100;
 
     public string foundWeapon;
     public string[] weaponsKnown;
@@ -109,27 +110,28 @@ public class playerMovement : MonoBehaviour
                 weapon = currentWeaponObj.GetComponent<WeaponScript>();
                 canAttack = true;
             }
-            findingGate = collision.gameObject.tag;
-            if (collision.gameObject.tag == findGate())
-            {
-                if (findGate() == "fireGate")
-                {
-                    SceneManager.LoadScene(1);
-                }
-                else if (findGate() == "waterGate")
-                {
-                    SceneManager.LoadScene(3);
-                }
-                else if (findGate() == "natureGate")
-                {
-                    SceneManager.LoadScene(2);
-                }
-                if (collision.gameObject.tag == "dungonExit")
-                {
-                    SceneManager.LoadScene(0);
-                }
-            }
         }
+                findingGate = collision.gameObject.tag;
+                if (collision.gameObject.tag == findGate())
+                {
+                    if (findGate() == "fireGate")
+                    {
+                        SceneManager.LoadScene(1);
+                    }
+                    else if (findGate() == "waterGate")
+                    {
+                        SceneManager.LoadScene(3);
+                    }
+                    else if (findGate() == "natureGate")
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                    if (collision.gameObject.tag == "dungonExit")
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                }
+        
     }
 
     public void Drop()
