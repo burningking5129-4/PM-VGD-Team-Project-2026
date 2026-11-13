@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class gameManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.Find("player").GetComponent<playerMovement>();
 
+        deathScreen = GameObject.Find("DeathScreen");
+        deathScreen.SetActive(false);
+
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
     }
 
@@ -30,8 +34,21 @@ public class gameManager : MonoBehaviour
 
         if (player.hp <= 0)
         {
-            //Time.timeScale = 0;
-            //deathScreen.SetActive(true);           
+            Time.timeScale = 0;
+            deathScreen.SetActive(true);           
         }
+    }
+
+    public void LoadLevel(int levelID)
+    {
+        if (levelID >= SceneManager.sceneCountInBuildSettings)
+            Debug.Log("Level ID is too high: " + levelID);
+        else
+            SceneManager.LoadScene(levelID);
+    }
+
+    public void LoadCity()
+    {
+        LoadLevel(0);
     }
 }

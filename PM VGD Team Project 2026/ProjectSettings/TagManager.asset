@@ -14,6 +14,7 @@ TagManager:
   - natureGate
   - dungonExit
   - enemy
+  - UI
   layers:
   - Default
   - TransparentFX
