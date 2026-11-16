@@ -13,19 +13,19 @@ public class enemy : MonoBehaviour
 
     public playerMovement player; 
     Rigidbody2D rb;
-    Transform target;
+    Transform destination;
     Vector2 moveAim;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.Find("player").transform;
+        destination = GameObject.Find("player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (target.position - transform.position);
+        Vector3 direction = (destination.position - transform.position);
         moveAim = direction;
     }
 

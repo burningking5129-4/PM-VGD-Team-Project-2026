@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using Unity.Cinemachine;
 
 public class gameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class gameManager : MonoBehaviour
 
     public Image healthBar;
 
+    public CinemachineCamera cameraFollow;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +27,16 @@ public class gameManager : MonoBehaviour
         deathScreen.SetActive(false);
 
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+
+        cameraFollow.Target.TrackingTarget = player.gameObject.transform;
+
+        if (cameraFollow.Target.TrackingTarget == null)
+        {
+            Debug.Log("cameraFollow is NULL!");
+        }
+        if (player.gameObject.transform == null) {
+            Debug.Log("player is NULL!");
+        }
     }
 
     // Update is called once per frame

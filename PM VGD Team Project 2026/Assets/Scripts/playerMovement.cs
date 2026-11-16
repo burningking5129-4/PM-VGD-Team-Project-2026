@@ -19,8 +19,10 @@ public class playerMovement : MonoBehaviour
     public bool isAttacking = false;
     public bool canAttack = false;
 
+    public GameObject loadWeapon;
     public GameObject currentWeaponObj;
     public GameObject findingWeapon;
+    public GameObject spawnPoint;
     public Collider2D currentWeaponCol;
 
     public WeaponScript weapon;
@@ -28,10 +30,11 @@ public class playerMovement : MonoBehaviour
     Transform weaponSlot;
     public Rigidbody2D rb;
     public Vector2 moveInput;
-    
+
     //initializes variables
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         weaponSlot = transform.GetChild(0);
         rb.GetComponent<Rigidbody2D>();
         weaponsKnown = new string[3];
@@ -118,14 +121,17 @@ public class playerMovement : MonoBehaviour
                     if (findGate() == "fireGate")
                     {
                         SceneManager.LoadScene(1);
+                        gameObject.transform.position = spawnPoint.transform.position; 
                     }
                     else if (findGate() == "waterGate")
                     {
                         SceneManager.LoadScene(3);
+                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                     else if (findGate() == "natureGate")
                     {
                         SceneManager.LoadScene(2);
+                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                     if (collision.gameObject.tag == "dungonExit")
                     {

@@ -15,6 +15,7 @@ TagManager:
   - dungonExit
   - enemy
   - UI
+  - playerSpawn
   layers:
   - Default
   - TransparentFX
