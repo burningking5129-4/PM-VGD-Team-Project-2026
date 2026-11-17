@@ -52,6 +52,7 @@ public class playerMovement : MonoBehaviour
     {
         rb.linearVelocity = moveInput * speed;
 
+        rb.rotation = Mathf.Atan2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y, Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x) * Mathf.Rad2Deg;
     }
     
     //moves the player
@@ -136,6 +137,7 @@ public class playerMovement : MonoBehaviour
                     if (collision.gameObject.tag == "dungonExit")
                     {
                         SceneManager.LoadScene(4);
+                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                 }
         
