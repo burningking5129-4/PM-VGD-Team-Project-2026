@@ -25,6 +25,7 @@ public class playerMovement : MonoBehaviour
     public GameObject spawnPoint;
     public Collider2D currentWeaponCol;
 
+    public gameManager gm;
     public WeaponScript weapon;
 
     Transform weaponSlot;
@@ -34,6 +35,8 @@ public class playerMovement : MonoBehaviour
     //initializes variables
     void Start()
     {
+        gameObject.transform.position = spawnPoint.transform.position;
+        DontDestroyOnLoad(gm);
         DontDestroyOnLoad(gameObject);
         weaponSlot = transform.GetChild(0);
         rb.GetComponent<Rigidbody2D>();
@@ -122,22 +125,18 @@ public class playerMovement : MonoBehaviour
                     if (findGate() == "fireGate")
                     {
                         SceneManager.LoadScene(1);
-                        gameObject.transform.position = spawnPoint.transform.position; 
                     }
                     else if (findGate() == "waterGate")
                     {
                         SceneManager.LoadScene(3);
-                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                     else if (findGate() == "natureGate")
                     {
                         SceneManager.LoadScene(2);
-                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                     if (collision.gameObject.tag == "dungonExit")
                     {
                         SceneManager.LoadScene(4);
-                        gameObject.transform.position = spawnPoint.transform.position;
                     }
                 }
         

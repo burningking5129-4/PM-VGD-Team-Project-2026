@@ -19,13 +19,12 @@ public class gameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        deathScreen = GameObject.Find("DeathScreen");
+        deathScreen.SetActive(false);
         DontDestroyOnLoad(camera);
         Time.timeScale = 1;
 
         player = GameObject.Find("player").GetComponent<playerMovement>();
-
-        deathScreen = GameObject.Find("DeathScreen");
-        deathScreen.SetActive(false);
 
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
 
