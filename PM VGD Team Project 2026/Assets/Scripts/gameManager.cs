@@ -14,11 +14,12 @@ public class gameManager : MonoBehaviour
 
     public Image healthBar;
 
-    public CinemachineCamera cameraFollow;
+    public CinemachineCamera camera;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        DontDestroyOnLoad(camera);
         Time.timeScale = 1;
 
         player = GameObject.Find("player").GetComponent<playerMovement>();
@@ -28,15 +29,6 @@ public class gameManager : MonoBehaviour
 
         healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
 
-        cameraFollow.Target.TrackingTarget = player.gameObject.transform;
-
-        if (cameraFollow.Target.TrackingTarget == null)
-        {
-            Debug.Log("cameraFollow is NULL!");
-        }
-        if (player.gameObject.transform == null) {
-            Debug.Log("player is NULL!");
-        }
     }
 
     // Update is called once per frame
