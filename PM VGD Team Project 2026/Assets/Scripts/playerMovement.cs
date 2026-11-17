@@ -135,7 +135,7 @@ public class playerMovement : MonoBehaviour
                     }
                     if (collision.gameObject.tag == "dungonExit")
                     {
-                        SceneManager.LoadScene(0);
+                        SceneManager.LoadScene(4);
                     }
                 }
         
