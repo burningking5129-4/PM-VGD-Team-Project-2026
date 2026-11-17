@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
+    public int health;
     public float speed = 2f;
     public float strength = 10f;
     public float attackCooldown = 1.5f;
 
     public bool isAttacking = false;
 
-    public playerMovement player; 
+    public playerMovement player;
+    public WeaponScript weapon;
     Rigidbody2D rb;
     Transform destination;
     Vector2 moveAim;
@@ -27,6 +29,11 @@ public class enemy : MonoBehaviour
     {
         Vector3 direction = (destination.position - transform.position);
         moveAim = direction;
+
+        if(health > 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void FixedUpdate()
@@ -41,6 +48,11 @@ public class enemy : MonoBehaviour
             isAttacking = true;
             player.hp -= strength;
             StartCoroutine("damageCooldown");
+        }
+
+        if(collision.gameObject.tag == "attackBox" || collision.gameObject.tag == "arrow")
+        {
+            health = health - weapon.weaponDamage;
         }
     }
 
