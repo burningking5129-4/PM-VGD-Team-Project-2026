@@ -16,14 +16,17 @@ TagManager:
   - enemy
   - UI
   - playerSpawn
+  - roomOne
+  - roomTwo
+  - roomThree
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - floor
   - Water
   - UI
-  - 
+  - entities
   - 
   - 
   - 

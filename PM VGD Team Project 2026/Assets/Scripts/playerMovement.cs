@@ -10,6 +10,8 @@ public class playerMovement : MonoBehaviour
     public float hp = 100;
     public float maxhp = 100;
 
+    public int roomNum;
+
     public string foundWeapon;
     public string[] weaponsKnown;
     public string[] gate;
@@ -57,7 +59,7 @@ public class playerMovement : MonoBehaviour
 
         rb.rotation = Mathf.Atan2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y, Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x) * Mathf.Rad2Deg;
     }
-    
+
     //moves the player
     public void Move(InputAction.CallbackContext context)
     {
@@ -142,6 +144,15 @@ public class playerMovement : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("triggered");
+        if (other.gameObject.tag == "roomOne")
+        {
+            roomNum = 1;
+            Debug.Log("player is in room One");
+        }
+    }
     public void Drop()
     {
         if (currentWeaponObj != null)
