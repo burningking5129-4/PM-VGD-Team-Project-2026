@@ -6,6 +6,8 @@ using UnityEngine;
 public class enemy : MonoBehaviour
 {
     public int health;
+    public int roomNumber;
+
     public float speed = 2f;
     public float strength = 10f;
     public float attackCooldown = 1.5f;
@@ -20,6 +22,12 @@ public class enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (player == null)
+        {
+            // Finds the player automatically in the scene
+            player = FindAnyObjectByType<playerMovement>();
+        }
+        roomNumber = 0;
         rb = GetComponent<Rigidbody2D>();
         destination = GameObject.Find("player").transform;
     }
@@ -27,8 +35,13 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (destination.position - transform.position);
-        moveAim = direction;
+        Debug.Log(player.roomNum);
+        Debug.Log(roomNumber);
+        if (roomNumber == player.roomNum)
+        {
+            Vector3 direction = (destination.position - transform.position);
+            moveAim = direction;
+        }
 
         if(health > 0)
         {
@@ -38,7 +51,10 @@ public class enemy : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveAim.x, moveAim.y) * speed;
+        if (roomNumber == player.roomNum)
+        {
+           rb.linearVelocity = new Vector2(moveAim.x, moveAim.y) * speed;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +69,16 @@ public class enemy : MonoBehaviour
         if(collision.gameObject.tag == "attackBox" || collision.gameObject.tag == "arrow")
         {
             health = health - weapon.weaponDamage;
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "roomOne")
+        {
+            roomNumber = 1;
+            Debug.Log("enemy is in room one");
         }
     }
 
