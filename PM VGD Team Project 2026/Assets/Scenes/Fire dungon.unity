@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c2aca3701f8243b648984334a6433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy
-  health: 0
+  health: 10
   roomNumber: 0
   speed: 2
   strength: 10
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c2aca3701f8243b648984334a6433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy
-  health: 0
+  health: 10
   roomNumber: 0
   speed: 2
   strength: 10
@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c2aca3701f8243b648984334a6433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy
-  health: 0
+  health: 10
   roomNumber: 0
   speed: 2
   strength: 10

@@ -7,7 +7,7 @@ public class Spear : WeaponScript
     {
         weaponRb = GetComponent<Rigidbody2D>();
         firingDirection = Camera.main;
-        attackBox = GameObject.Find("spearAttackBox");
+        attackBox = GameObject.FindGameObjectWithTag("attackBox");
     }
 
 }

@@ -70,11 +70,6 @@ public class enemy : MonoBehaviour
             StartCoroutine("damageCooldown");
         }
 
-        if(collision.gameObject.tag == "attackBox" || collision.gameObject.tag == "arrow")
-        {
-            health = health - weapon.weaponDamage;
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -83,6 +78,10 @@ public class enemy : MonoBehaviour
         {
             roomNumber = 1;
             Debug.Log("enemy is in room one");
+        }
+        if (collision.gameObject.tag == "attackBox" || collision.gameObject.tag == "arrow")
+        {
+            health = health - weapon.weaponDamage;
         }
     }
 
