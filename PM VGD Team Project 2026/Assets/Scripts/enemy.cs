@@ -35,22 +35,26 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player.roomNum);
-        Debug.Log(roomNumber);
         if (roomNumber == player.roomNum)
         {
             Vector3 direction = (destination.position - transform.position);
             moveAim = direction;
         }
 
-        if(health > 0)
+        if(health <= 0)
         {
             Destroy(gameObject);
+            Debug.Log("update did it");
         }
     }
 
     public void FixedUpdate()
     {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            Debug.Log("fixedupdate did it");
+        }
         if (roomNumber == player.roomNum)
         {
            rb.linearVelocity = new Vector2(moveAim.x, moveAim.y) * speed;

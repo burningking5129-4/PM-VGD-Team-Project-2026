@@ -54,7 +54,7 @@ public class WeaponScript : MonoBehaviour
             StartCoroutine("Attacking");
         }
 
-        if (canAttack && weaponType == "Ranged" && arrows>0)
+        if (canAttack && weaponType == "Ranged" && arrows > 0)
         {
             canAttack = false;
 
@@ -67,6 +67,7 @@ public class WeaponScript : MonoBehaviour
     }
     IEnumerator Attacking()
     {
+        enemy.health -= weaponDamage;
         yield return new WaitForSeconds(0);
 
         if(weaponType == "Melee")

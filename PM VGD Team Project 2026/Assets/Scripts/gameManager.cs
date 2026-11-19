@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
         if (player.hp <= 0)
         {
             Time.timeScale = 0;
-            deathScreen.SetActive(true);           
+            deathScreen.SetActive(true);
         }
     }
 
