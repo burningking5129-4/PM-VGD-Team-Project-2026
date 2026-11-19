@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -16,8 +17,8 @@ public class WeaponScript : MonoBehaviour
     public Camera firingDirection;
 
     [Header("Meta Attributes")]
-    public bool canAttack;
     public bool holdToAttack;
+    public bool overlapping;
     public int weaponID;
     public string weaponName;
     public string weaponType;
@@ -43,20 +44,20 @@ public class WeaponScript : MonoBehaviour
     {
         weaponRb = GetComponent<Rigidbody2D>();
         firingDirection = Camera.main;
+        enemy = gameObject.GetComponent<enemy>();
     }
     
     public void Attack()
     {
-        if (canAttack && weaponType == "melee")
+        if (player.canAttack == true && weaponType == "melee")
         {
-            canAttack = false;
-            attackBox.SetActive(true);
+            player.canAttack = false;
             StartCoroutine("Attacking");
         }
 
-        if (canAttack && weaponType == "ranged" && arrows > 0)
+        if (player.canAttack && weaponType == "ranged" && arrows > 0)
         {
-            canAttack = false;
+            player.canAttack = false;
 
             arrows--;
 
@@ -65,17 +66,34 @@ public class WeaponScript : MonoBehaviour
             Destroy(p, arrowLifespan);
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            overlapping = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            overlapping = false;
+        }
+    }
+
     IEnumerator Attacking()
     {
-        enemy.health -= weaponDamage;
+        if (overlapping == true)
+        {
+            enemy.health -= weaponDamage;
+            Debug.Log(enemy.health);
+            Debug.Log("weapon did damage");
+        }
         yield return new WaitForSeconds(weaponCooldown);
 
-        if(weaponType == "Melee")
-        {
-            attackBox.SetActive(false);
-        }
-
-        canAttack = true;
+        player.canAttack = true;
     }
 
     // Note for self, add the hitboxes for the weapons and make the arrow

@@ -52,11 +52,6 @@ public class enemy : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            Debug.Log("fixedupdate did it");
-        }
         if (roomNumber == player.roomNum)
         {
            rb.linearVelocity = new Vector2(moveAim.x, moveAim.y) * speed;
@@ -80,10 +75,6 @@ public class enemy : MonoBehaviour
         {
             roomNumber = 1;
             Debug.Log("enemy is in room one");
-        }
-        if (other.gameObject.tag == "attackBox" || other.gameObject.tag == "arrow")
-        {
-            health -= Spear.weaponDamage;
         }
     }
 

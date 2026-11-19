@@ -7,8 +7,8 @@ public class playerMovement : MonoBehaviour
 {
     //player movement variables \ speed doesnt change in script, must change in inspector
     public float speed = 3.5f;
-    public float hp = 100;
-    public float maxhp = 100;
+    public float hp;
+    public float maxhp;
 
     public int roomNum;
 
@@ -29,7 +29,6 @@ public class playerMovement : MonoBehaviour
     public Collider2D currentWeaponCol;
 
     public gameManager gm;
-    public meleeWeapon mWeapon;
     public WeaponScript weapon;
 
     Transform weaponSlot;
@@ -39,6 +38,8 @@ public class playerMovement : MonoBehaviour
     //initializes variables
     void Start()
     {
+        hp = 100;
+        maxhp = 100;
         gameObject.transform.position = spawnPoint.transform.position;
         DontDestroyOnLoad(gm);
         DontDestroyOnLoad(gameObject);
@@ -94,14 +95,9 @@ public class playerMovement : MonoBehaviour
 
     public void attack()
     {
-        if(weaponType == "melee")
-        {
-            mWeapon.meleeAttack();
-        }
-        /*if(weaponType == "ranged")
-        {
-            //RANGED SHIT GO HERE
-        }*/
+        Debug.Log(weapon.weaponType);
+        Debug.Log(canAttack);
+        weapon.Attack();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -111,7 +107,6 @@ public class playerMovement : MonoBehaviour
         {
             if (collision.gameObject.tag == findWeaponName())
             {
-                Debug.Log("collided");
                 collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
                 if (findWeaponName() == "spear" || findWeaponName() == "sword")
                 {
@@ -162,11 +157,9 @@ public class playerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("triggered");
         if (other.gameObject.tag == "roomOne")
         {
             roomNum = 1;
-            Debug.Log("player is in room One");
         }
     }
     public void Drop()
