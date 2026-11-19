@@ -17,6 +17,7 @@ public class playerMovement : MonoBehaviour
     public string[] gate;
     public string findingGate;
     public string weaponHeld;
+    public string weaponType;
 
     public bool isAttacking = false;
     public bool canAttack = false;
@@ -28,6 +29,7 @@ public class playerMovement : MonoBehaviour
     public Collider2D currentWeaponCol;
 
     public gameManager gm;
+    public meleeWeapon mWeapon;
     public WeaponScript weapon;
 
     Transform weaponSlot;
@@ -90,6 +92,18 @@ public class playerMovement : MonoBehaviour
         return findingGate;
     }
 
+    public void attack()
+    {
+        if(weaponType == "melee")
+        {
+            mWeapon.meleeAttack();
+        }
+        /*if(weaponType == "ranged")
+        {
+            //RANGED SHIT GO HERE
+        }*/
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         findingWeapon = collision.gameObject;
@@ -99,13 +113,15 @@ public class playerMovement : MonoBehaviour
             {
                 Debug.Log("collided");
                 collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
-                if (findWeaponName() == "spear")
+                if (findWeaponName() == "spear" || findWeaponName() == "sword")
                 {
-                    rb.rotation = 90;
-
+                    weaponType = "melee";
+                } else if(findWeaponName() == "bow") 
+                {
+                    weaponType = "ranged";
                 }
 
-                weaponHeld = collision.gameObject.tag;
+                    weaponHeld = collision.gameObject.tag;
 
                 collision.gameObject.transform.SetParent(weaponSlot);
 
