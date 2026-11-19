@@ -79,7 +79,7 @@ public class enemy : MonoBehaviour
             roomNumber = 1;
             Debug.Log("enemy is in room one");
         }
-        if (collision.gameObject.tag == "attackBox" || collision.gameObject.tag == "arrow")
+        if (other.gameObject.tag == "attackBox" || other.gameObject.tag == "arrow")
         {
             health = health - weapon.weaponDamage;
         }

@@ -19,15 +19,18 @@ public class gameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        deathScreen = GameObject.Find("DeathScreen");
-        deathScreen.SetActive(false);
-        DontDestroyOnLoad(camera);
-        Time.timeScale = 1;
+        if (SceneManager.GetActiveScene().buildIndex != 5)
+        {
+            deathScreen = GameObject.Find("DeathScreen");
+            deathScreen.SetActive(false);
+            DontDestroyOnLoad(camera);
+            Time.timeScale = 1;
 
-        player = GameObject.Find("player").GetComponent<playerMovement>();
+            player = GameObject.Find("player").GetComponent<playerMovement>();
 
-        healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+            healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
 
+        }
     }
 
     // Update is called once per frame
@@ -53,5 +56,10 @@ public class gameManager : MonoBehaviour
     public void LoadCity()
     {
         LoadLevel(0);
+    }
+
+    public void quit()
+    {
+        Application.Quit();
     }
 }
