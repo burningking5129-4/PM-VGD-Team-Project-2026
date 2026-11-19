@@ -19,6 +19,7 @@ TagManager:
   - roomOne
   - roomTwo
   - roomThree
+  - attackBox
   layers:
   - Default
   - TransparentFX
