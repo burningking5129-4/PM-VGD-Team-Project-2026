@@ -16,7 +16,6 @@ public class enemy : MonoBehaviour
 
     public playerMovement player;
     public WeaponScript weapon;
-    public Spear Spear;
 
     Rigidbody2D rb;
     Transform destination;
@@ -32,6 +31,7 @@ public class enemy : MonoBehaviour
         roomNumber = 0;
         rb = GetComponent<Rigidbody2D>();
         destination = GameObject.Find("player").transform;
+        weapon = player.currentWeaponObj.GetComponent<WeaponScript>();
     }
 
     // Update is called once per frame
@@ -46,7 +46,6 @@ public class enemy : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
-            Debug.Log("update did it");
         }
     }
 
@@ -66,7 +65,6 @@ public class enemy : MonoBehaviour
             player.hp -= strength;
             StartCoroutine("damageCooldown");
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -75,6 +73,20 @@ public class enemy : MonoBehaviour
         {
             roomNumber = 1;
             Debug.Log("enemy is in room one");
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "attackBox")
+        {
+            if (weapon.overlapping)
+            {
+                if (player.isAttacking == true)
+                {
+                    health -= weapon.weaponDamage;
+                }
+            }
         }
     }
 

@@ -95,8 +95,6 @@ public class playerMovement : MonoBehaviour
 
     public void attack()
     {
-        Debug.Log(weapon.weaponType);
-        Debug.Log(canAttack);
         weapon.Attack();
     }
 
@@ -107,7 +105,7 @@ public class playerMovement : MonoBehaviour
         {
             if (collision.gameObject.tag == findWeaponName())
             {
-                collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, -90f, 90));
+                collision.gameObject.transform.SetPositionAndRotation(weaponSlot.position, new Quaternion(0, 0, 0, 0));
                 if (findWeaponName() == "spear" || findWeaponName() == "sword")
                 {
                     weaponType = "melee";
@@ -173,5 +171,5 @@ public class playerMovement : MonoBehaviour
         }
     }
 }
+//new Quaternion(0, 0, -90f, 90)
 
-  

@@ -17,7 +17,6 @@ public class WeaponScript : MonoBehaviour
     public Camera firingDirection;
 
     [Header("Meta Attributes")]
-    public bool holdToAttack;
     public bool overlapping;
     public int weaponID;
     public string weaponName;
@@ -52,10 +51,12 @@ public class WeaponScript : MonoBehaviour
         if (player.canAttack == true && weaponType == "melee")
         {
             player.canAttack = false;
+            player.isAttacking = true;
             StartCoroutine("Attacking");
+            StartCoroutine("attackLength");
         }
 
-        if (player.canAttack && weaponType == "ranged" && arrows > 0)
+        if (player.canAttack && weaponType == "ranged")
         {
             player.canAttack = false;
 
@@ -85,15 +86,15 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator Attacking()
     {
-        if (overlapping == true)
-        {
-            enemy.health -= weaponDamage;
-            Debug.Log(enemy.health);
-            Debug.Log("weapon did damage");
-        }
         yield return new WaitForSeconds(weaponCooldown);
 
         player.canAttack = true;
+    }
+
+    IEnumerator attackLength()
+    {
+        yield return new WaitForSeconds(0.1f);
+        player.isAttacking = false;
     }
 
     // Note for self, add the hitboxes for the weapons and make the arrow

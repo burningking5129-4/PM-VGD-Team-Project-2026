@@ -36,7 +36,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.fillAmount = (float)player.hp / (float)player.maxhp;
+        if (healthBar != null)
+        {
+            healthBar.fillAmount = (float)player.hp / (float)player.maxhp;
+        }
 
         if (player.hp <= 0)
         {
