@@ -1784,11 +1784,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c2aca3701f8243b648984334a6433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::enemy
+  health: 0
+  roomNumber: 0
   speed: 2
   strength: 10
   attackCooldown: 1.5
   isAttacking: 0
   player: {fileID: 0}
+  weapon: {fileID: 0}
 --- !u!1001 &6907123945519155413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1836,6 +1839,18 @@ PrefabInstance:
     - target: {fileID: 3462075397340586191, guid: 3fa34f359d70b934abd9de8c629b9e92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612907530050221196, guid: 3fa34f359d70b934abd9de8c629b9e92, type: 3}
+      propertyPath: m_Color.b
+      value: 0.84313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612907530050221196, guid: 3fa34f359d70b934abd9de8c629b9e92, type: 3}
+      propertyPath: m_Color.g
+      value: 0.15858513
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612907530050221196, guid: 3fa34f359d70b934abd9de8c629b9e92, type: 3}
+      propertyPath: m_Color.r
+      value: 0.113725476
       objectReference: {fileID: 0}
     - target: {fileID: 7612907530050221196, guid: 3fa34f359d70b934abd9de8c629b9e92, type: 3}
       propertyPath: m_SortingOrder
